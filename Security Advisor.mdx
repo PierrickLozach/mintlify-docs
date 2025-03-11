@@ -1,0 +1,129 @@
+---
+title: 'Security Advisor'
+description: 'Is your Genesys Cloud organization secure?'
+---
+
+## Introduction
+
+Security Advisor is an advanced tool designed to optimize security for Genesys Cloud environments. It meticulously scrutinizes your organization's Genesys Cloud configuration, uncovering misconfigurations that could potentially compromise security.
+
+The tool serves as your essential companion for maintaining a robust security posture while navigating the complexities of your Genesys Cloud deployment.
+
+<img src='/images/Security_Advisor_Screenshot.png' alt='Audit Viewer Interface' />
+
+<CardGroup cols={2}>
+  <Card title='Comprehensive Configuration Analysis' icon='window-maximize'>
+    Examine every aspect of your Genesys Cloud setup to identify security vulnerabilities
+  </Card>
+  <Card title='Detailed Reporting' icon='circle-check'>
+    Presents findings in a clear, user-friendly format with intuitive visualizations
+  </Card>
+  <Card title='Compliance Support' icon='shield-halved'>
+    Includes specialized options for HIPAA and PCI compliance requirements with targeted assessments
+  </Card>
+  <Card title='Risk Assessment' icon='bolt'>
+    Provides scoring to help prioritize security issues based on severity and impact
+  </Card>
+  <Card title='PDF Report Generation' icon='file-pdf'>
+    Creates downloadable reports for offline review, sharing with stakeholders, or audit documentation
+  </Card>
+</CardGroup>
+
+## Benefits
+
+By leveraging Security Advisor, your organization can:
+
+- Improve compliance with security standards and regulatory requirements
+- Maintain a robust security posture against evolving threats
+- Navigate Genesys Cloud configuration complexities with confidence
+- Safeguard sensitive data and operations from potential risks
+- Proactively identify and address security gaps before they can be exploited
+
+## Requirements
+
+To use Security Advisor, you need specific permissions when accessing it for the first time to create an OAuth client:
+
+- Analytics > Data Retention > View - to view your data retention settings
+- OAuth > Client > Add, Edit, View - to create and manage the OAuth client
+- Audit > View - to access audit information
+- Organization > Settings > View - to review organization settings
+
+It is recommended to:
+
+- Create a specific role with these permissions in Genesys Cloud
+- Assign the role to your user account temporarily
+- Remove the role when setup is complete to maintain least-privilege access
+
+## Setup and Installation
+
+- Navigate to the Security Advisor section in the SPC Portal
+- Follow the guided setup wizard:
+  - Welcome step (introduces the tool and prerequisites)
+  - Options step (configure your preferences)
+  - OAuth client creation (automatic with appropriate permissions)
+
+## Usage
+
+### Configure Job Settings
+
+- Set a descriptive name for your security advisor job for easy identification
+- Configure time zone settings (defaults to browser time zone) for accurate reporting
+- Enable HIPAA compliance requirements if your organization must adhere to healthcare regulations
+- Enable PCI compliance options if you handle payment card data
+
+### Run Security Scan
+
+- The tool will analyze your Genesys Cloud configuration using a series of API calls
+- Progress can be tracked through the real-time interface indicators
+- Analysis typically takes 5-10 minutes depending on the size of your organization
+
+### Review Results
+
+- View the comprehensive security report with color-coded risk indicators
+- Examine identified issues and recommendations organized by security category
+- Review detailed explanations for each finding with impact assessment
+- Download PDF reports for offline review, sharing with stakeholders, or documentation
+
+## How Scoring is Calculated
+
+Security Advisor evaluates various aspects of your Genesys Cloud configuration and calculates risk scores based on:
+
+- Severity of identified misconfigurations (Critical, High, Medium, Low)
+- Compliance impact (especially for HIPAA and PCI requirements)
+- Best practices implementation across authentication, roles, and data handling
+- Overall security posture compared to recommended standards
+
+The scoring system helps prioritize which issues should be addressed first to quickly improve your security stance and allocate resources effectively.
+
+## How It Works
+
+Security Advisor uses your own Genesys Cloud credentials (which are not shared with Genesys) to call multiple APIs and create a detailed security assessment. The process:
+
+1. Creates an OAuth client within your Genesys Cloud organization
+2. Uses this client to securely access configuration data using Genesys Cloud APIs
+3. Analyzes settings against security best practices and compliance requirements
+4. Generates a comprehensive report with actionable recommendations
+5. Provides clear guidance on remediation steps for each finding
+
+All analysis happens in real-time, and no configuration data is stored beyond the current session.
+
+## Troubleshooting
+
+If you encounter issues with Security Advisor:
+
+- Verify you have the required permissions for OAuth client creation
+- Check that the OAuth client was created successfully in your Genesys Cloud admin settings
+- Review any error messages in the interface for specific API connectivity issues
+- Ensure your Genesys Cloud organization is accessible from your current network
+- Try refreshing your browser or clearing cache if the interface appears unresponsive
+- Contact support at spc.portal@genesys.com for assistance with persistent issues
+
+## Next Steps
+
+After reviewing your Security Advisor report:
+
+1. Address critical findings first to quickly improve your security posture
+2. Create an action plan for remediating identified issues
+3. Schedule regular security scans to monitor your environment
+4. Use the findings to inform security training and policy development
+5. Consider re-running the scan after major Genesys Cloud configuration changes

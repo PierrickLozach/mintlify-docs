@@ -1,0 +1,121 @@
+---
+title: 'Data Subject Requests'
+description: 'Learn how to manage data subject requests within your Genesys Cloud organization.'
+---
+
+## Introduction
+
+The Data Subject Requests tool is a comprehensive solution designed to help you navigate GDPR compliance requirements within your Genesys Cloud organization. It provides both a practical environment for conducting real GDPR operations and a simulated environment for training and testing, empowering your organization to efficiently respond to data subject rights requests while ensuring regulatory compliance.
+
+With an intuitive interface and streamlined workflows, the Data Subject Requests tool simplifies the often complex process of handling GDPR-related operations, from data access requests to data erasure and portability requirements.
+
+<CardGroup cols={2}>
+  <Card title='Real GDPR API Operations' icon='key'>
+    Perform actual GDPR operations within your Genesys Cloud environment.
+  </Card>
+  <Card title='Simulation Mode' icon='desktop'>
+    Test and practice GDPR workflows without impacting real data.
+  </Card>
+  <Card title='Subject Management' icon='user'>
+    Easily search and identify data subjects across your organization.
+  </Card>
+  <Card title='Request Management' icon='bell'>
+    Track and process various request types (export, delete, update).
+  </Card>
+  <Card title='Step-by-Step Guidance' icon='list'>
+    Clear workflows guide users through each stage of the GDPR process.
+  </Card>
+  <Card title='Compliance Documentation' icon='file-pdf'>
+    Generate records of completed requests for audit purposes.
+  </Card>
+</CardGroup>
+
+## Benefits
+
+By implementing the Data Subject Requests tool, your organization can:
+
+- Streamline GDPR compliance processes with minimal administrative overhead
+- Reduce response time for data subject requests
+- Minimize risk of regulatory non-compliance and associated penalties
+- Build trust with customers by demonstrating commitment to data privacy
+- Train staff on GDPR procedures in a safe, simulated environment
+- Maintain comprehensive records of data subject request handling
+
+## Setup and Installation
+
+- Navigate to the Data Subject Requests section in the SPC Portal
+- The system will check if your account has the required permissions
+- On first use, a free trial period is automatically activated
+- The necessary OAuth client will be created in your Genesys Cloud organization
+- Follow the on-screen instructions to complete the setup process
+
+## Usage
+
+<AccordionGroup>
+  <Accordion icon="user" title="Create a new request">
+
+1. Navigate to the Data Subject Requests dashboard
+2. Click "New Request" to initiate the process
+3. Search for a subject using name, email, or other identifiers
+4. Select the subject from the search results
+5. Choose the request type (export, delete, update)
+6. Complete any additional information required for the specific request type
+7. Submit the request to begin processing
+
+  </Accordion>
+
+  <Accordion icon="clock" title="Manage existing requests">
+1. View all requests in the dashboard with their current status
+2. Filter requests by type, status, or date
+3. Select individual requests to view detailed information
+4. Download any exported data (for export requests)
+5. View completion status and timestamps for all processing steps
+
+  </Accordion>
+
+  <Accordion icon="bolt" title="Use the Simulation Mode">
+When learning the system or training staff:
+
+1. Toggle the "Use Real API" switch to OFF before creating requests
+2. Practice all functions without affecting actual data
+3. Simulation mode provides identical workflow but only mimics API calls
+
+  </Accordion>
+</AccordionGroup>
+
+## How It Works
+
+The Data Subject Requests tool integrates with Genesys Cloud's GDPR APIs to provide a seamless experience:
+
+- Subject Identification: The tool searches for subjects across Genesys Cloud using identifiers like user ID, email, or name
+- Request Submission: Selected request types are processed through appropriate GDPR API endpoints
+- Processing: The system handles the request, which may include:
+  - Collecting all relevant user data (for export requests)
+  - Removing specified user data (for deletion requests)
+  - Updating user information (for update requests)
+- Completion: Results are presented to the user with appropriate documentation
+- Record Keeping: All actions are logged for compliance and audit purposes
+
+All operations are executed with appropriate security controls and audit trails to maintain compliance with GDPR requirements.
+
+## Troubleshooting
+
+If you encounter issues with Data Subject Requests:
+
+- Verify you have the required permissions for OAuth client creation
+- Check that the OAuth client was created successfully in your Genesys Cloud admin settings
+- Review any error messages in the interface for specific API connectivity issues
+- Ensure your Genesys Cloud organization is accessible from your current network
+- Try refreshing your browser or clearing cache if the interface appears unresponsive
+- Contact support at spc.portal@genesys.com for assistance with persistent issues
+
+## Next Steps
+
+After implementing the Data Subject Requests tool:
+
+1. Train your privacy and support teams on using the tool effectively
+2. Create internal processes for handling different types of data subject requests
+3. Document your GDPR compliance procedures incorporating this tool
+4. Regularly test your response capabilities using the simulation mode
+5. Monitor request completion times to ensure they meet regulatory requirements
+6. Consider implementing additional privacy tools from the SPC Portal to enhance your overall compliance posture

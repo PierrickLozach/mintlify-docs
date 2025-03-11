@@ -1,0 +1,130 @@
+---
+title: Getting Started
+description: 'How to access the SPC Portal'
+---
+
+The Security, Privacy & Compliance (SPC) Portal allows you to access specialized tools created by the Genesys Security, Privacy & Compliance Center of Excellence team. Here's how to log in:
+
+<AccordionGroup>
+  <Accordion icon='cloud' title='I am a Genesys direct customer or a Genesys partner'>
+    This section is for Genesys **direct** customers and partners who have a Genesys Cloud organization. Genesys **indirect** customers are currently not supported.
+
+    <Note>The first user who logs in needs **administrator** privileges across all divisions within Genesys Cloud. The administrator requires, at minimum, the **General/Admin (All Divisions)** permission.</Note>
+
+    If you are not an administrator of your Genesys Cloud organization, please contact your organization's administrator to perform the initial set up and invite you to the SPC Portal.
+
+    <AccordionGroup>
+      <Accordion icon="right-to-bracket" title="Click on the Sign in button in the top right corner">
+        Click on the **Sign in** button in the top right corner.
+
+        <img className='block dark:hidden' src='/images/home-page-signin.png' alt='Sign In' />
+        <img className='hidden dark:block' src='/images/home-page-signin.png' alt='Sign In' />
+
+      </Accordion>
+      <Accordion icon="globe" title="Select your Genesys Cloud environment">
+        Select your Genesys Cloud **region** from the dropdown menu (where your organization is hosted):
+        - Americas (US East)
+        - Americas (US West)
+        - Europe (Frankfurt)
+        - Europe (Ireland)
+        - Asia Pacific (Sydney)
+        - And other available regions
+      </Accordion>
+      <Accordion icon="cloud" title="Login to your Genesys Cloud organization">
+        Make sure your Genesys Cloud organization is set.
+
+        In the screenshot below, the organization is set to **Genesys**. Use your organization's name instead.
+
+        <img className='block dark:hidden' src='/images/Genesys_Org_Set.png' alt='Genesys Organization Set' />
+        <img className='hidden dark:block' src='/images/Genesys_Org_Set.png' alt='Genesys Organization Set' />
+
+        If it is not set to the organization you wish to use, click on **[Change Organization]** to set your organization
+
+        If it is not set at all, click on **More Login Options** to set your organization:
+
+        <img className='block dark:hidden' src='/images/More_Login_Options.png' alt='More Login Options' />
+        <img className='hidden dark:block' src='/images/More_Login_Options.png' alt='More Login Options' />
+
+        Enter your Genesys Cloud credentials or use your Single Sign-On (SSO) provider to log in.
+
+        Once you have successfully logged in, you will be redirected to the SPC Portal home page.
+
+      </Accordion>
+      <Accordion icon="gear" title="Perform the initial setup">
+
+        <AccordionGroup>
+            When the first administrator logs in, they will have access to the Admin panel. As an administrator, you will need to:
+
+            1. Request full portal access if not already granted
+            2. Download the agreement file when prompted
+            3. Contact your account executive to upgrade your tenant to the appropriate tier
+
+            <Note>
+              Administrator accounts will automatically receive all application roles when upgrading.
+            </Note>
+
+          <Accordion icon="puzzle-piece" title="Application Activation">
+            As an administrator, you need to activate applications before regular users can access them:
+
+            1. Navigate to the Admin panel
+            2. Select the desired application
+            3. Activate the trial or subscription
+            4. Open the application at least once to complete initialization
+
+            Some applications may require additional permissions in Genesys Cloud to function properly.
+
+          </Accordion>
+
+          <Accordion icon="users-gear" title="Assigning Roles to Users">
+            After activating applications, you need to assign appropriate roles to your users:
+
+            1. Navigate to Admin > User Management
+            2. Select the user you want to modify
+            3. Assign the appropriate application roles based on their needs
+
+            <Note>
+              Regular users cannot access applications until an administrator assigns the proper roles to them.
+            </Note>
+
+          </Accordion>
+
+          <Accordion icon="envelope" title="Inviting other users">
+            Administrators can invite up to 5 additional users through the `Admin > Invitation Links` section.
+
+            1. Click on `Create invitation`
+            2. Specify the email address of the user you want to invite
+            3. Send the generated URL to the invited user
+
+            <Note>
+              Invited users will need to request access and go through the approval process before gaining full portal access.
+            </Note>
+
+          </Accordion>
+        </AccordionGroup>
+      </Accordion>
+      <Accordion icon="envelope" title="Inviting other users">
+        Administrators can invite up to 5 additional users through the `Admin > Invitation Links` section.
+
+        Click on `Create invitation` and specify the email address of the user you want to invite.
+
+      </Accordion>
+    </AccordionGroup>
+
+  </Accordion>
+  <Accordion icon='cloud' title='I am a Genesys employee'>
+    This section is for Genesys employees who have access to the `Genesys` Genesys Cloud organization.
+
+    - Click on the **Sign in** button in the top right corner.
+
+    <img className='block dark:hidden' src='/images/home-page-signin.png' alt='Sign In' />
+    <img className='hidden dark:block' src='/images/home-page-signin.png' alt='Sign In' />
+
+    - Select the **Americas (US East)** region from the dropdown menu.
+    - Make sure your Genesys Cloud organization is set to **Genesys** (if not, click on the `More Login Options` link to change it).
+    - Click on the **Okta** icon and log in via Okta.
+    - Once you have successfully authenticated, you will be redirected to the SPC Portal home page.
+
+    <Note>Not all tools are available when you log in to the **Genesys** organization due to permissions. If you want to test tools such as Security Advisor, Audit Viewer, and Data Subject Requests, please follow the **I am a Genesys customer or partner** instructions above using another Genesys Cloud organization.</Note>
+
+  </Accordion>
+</AccordionGroup>

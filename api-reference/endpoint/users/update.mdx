@@ -1,0 +1,17 @@
+---
+title: 'Partially update a User'
+openapi: 'PATCH /users/{id}'
+description: 'This endpoint allows you to partially update a user by providing the user ID and the fields you wish to modify.'
+parameters:
+  - name: id
+    in: path
+    required: true
+    description: 'The ID of the user to be updated.'
+    schema:
+      type: string
+responses:
+  '200':
+    description: 'User successfully updated.'
+  '404':
+    description: 'User not found.'
+---

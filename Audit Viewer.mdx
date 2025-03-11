@@ -1,0 +1,87 @@
+---
+title: 'Audit Viewer'
+description: 'Track and analyze user activities in your Genesys Cloud environment'
+---
+
+## Overview
+
+Audit Viewer is your indispensable tool for gaining comprehensive insights into your organization's Genesys Cloud activities while ensuring transparency, accountability, and security. Designed with user-friendly functionality in mind, Audit Viewer empowers Genesys Cloud customers to effortlessly navigate and interpret audit logs through an intuitive and accessible interface.
+
+<img src='/images/Audit_Viewer_Screenshot.png' alt='Audit Viewer Interface' />
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title='Comprehensive Activity Tracking' icon='magnifying-glass'>
+    Monitor and review user actions and system activities across your Genesys Cloud environment
+  </Card>
+  <Card title='Compliance Support' icon='clipboard-check'>
+    Ensure compliance with internal policies and external regulations like GDPR, HIPAA, and PCI-DSS
+  </Card>
+  <Card title='Real-time Notifications' icon='bell'>
+    Receive alerts about critical events or suspicious activities
+    <Note>This feature is only available for demo purposes by Genesys employees</Note>
+  </Card>
+  <Card title='Advanced Filtering' icon='filter'>
+    Quickly locate specific events using multiple filter parameters
+  </Card>
+</CardGroup>
+
+## Benefits
+
+Audit Viewer plays a crucial role in promoting accountability and transparency within organizations. By providing a detailed record of user actions and system activities, it helps organizations:
+
+- Track changes across the system
+- Detect unauthorized access attempts
+- Identify suspicious patterns
+- Generate compliance reports
+- Maintain a secure operational environment
+
+<Tip>Regular review of audit logs is considered a security best practice and is often required for compliance with various regulations.</Tip>
+
+## Using Audit Viewer
+
+### Accessing Audit Logs
+
+Navigate to the Audit Viewer section from the main dashboard to view your organization's audit logs.
+
+### Filtering Audit Data
+
+<AccordionGroup>
+  <Accordion icon="user" title="Entity Filtering">
+    Select specific entities to narrow your audit log search:
+
+    1. Use the entity dropdown to select the relevant category
+    2. Apply your selection to update the displayed logs
+
+  </Accordion>
+
+  <Accordion icon="bolt" title="Action Filtering">
+    Filter logs by specific actions performed:
+
+    1. Select an entity first to see available actions
+    2. Choose one or more actions from the dropdown menu
+    3. Apply to update results
+
+  </Accordion>
+
+  <Accordion icon="clock" title="Time Period Selection">
+    Specify a time range for your audit log search:
+
+    1. Select a predefined time range or create a custom interval
+    2. For custom intervals, set specific start and end dates/times
+
+  </Accordion>
+</AccordionGroup>
+
+### Notifications Setup
+
+<Note>Due to Event Bridge integration limitations, this feature is only available for demo purposes by Genesys employees</Note>
+
+Audit Viewer supports real-time notifications to ensure you're immediately informed of critical events.
+
+To configure notifications:
+
+1. Navigate to the Notifications section in Audit Viewer
+2. Set up email subscriptions for specific events. You will need to confirm the email subscription the first time you set it up. The email address will come from no-reply@sns.amazonaws.com. Ensure to check your spam folder if you don't see the confirmation email.
+3. Customize notification thresholds and delivery preferences

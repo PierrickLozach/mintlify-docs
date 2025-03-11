@@ -1,0 +1,546 @@
+{
+  "inputs": [
+    {
+      "inputFile": "../backend/lambdas/teacket/openapi.json",
+      "oas": {
+        "openapi": "3.0.0",
+        "components": {
+          "schemas": {
+            "SuccessResponse": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                }
+              }
+            }
+          }
+        },
+        "info": {
+          "title": "Teacket API",
+          "description": "Teacket API",
+          "version": "1.0.0"
+        },
+        "paths": {},
+        "servers": [
+          {
+            "url": "https://api.spc.genesys.com",
+            "description": "SPC API"
+          }
+        ],
+        "tags": [
+          {
+            "name": "Teacket",
+            "description": "Teacket API"
+          }
+        ]
+      }
+    },
+    {
+      "inputFile": "../backend/lambdas/tenants/openapi.json",
+      "oas": {
+        "openapi": "3.0.0",
+        "components": {
+          "schemas": {
+            "SuccessResponse": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                }
+              }
+            },
+            "BadRequestResponse": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                }
+              }
+            },
+            "token": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Origin": {
+              "type": "string",
+              "default": "*",
+              "example": "*"
+            },
+            "id": {
+              "type": "string"
+            }
+          }
+        },
+        "info": {
+          "title": "Tenants API",
+          "description": "Tenants API",
+          "version": "1.0.0"
+        },
+        "paths": {
+          "/tenants/search": {
+            "get": {
+              "summary": "Search tenants",
+              "description": "Gets all tenants",
+              "operationId": "getSearchTenants",
+              "parameters": [
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/tenants": {
+            "post": {
+              "summary": "Create a tenant",
+              "description": "Creates a tenant",
+              "operationId": "createTenant",
+              "parameters": [
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "get": {
+              "summary": "All tenants",
+              "description": "Gets all tenants",
+              "operationId": "getTenants",
+              "parameters": [
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/tenants/{id}": {
+            "get": {
+              "summary": "A tenant",
+              "description": "Gets a tenant",
+              "operationId": "getTenant",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Tenant Id",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/components/schemas/id"
+                  }
+                },
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "patch": {
+              "summary": "Partially update a tenant",
+              "description": "Partially updates a tenant",
+              "operationId": "patchTenant",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Tenant Id",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/components/schemas/id"
+                  }
+                },
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "delete": {
+              "summary": "Delete a tenant",
+              "description": "Deletes a tenant",
+              "operationId": "deleteTenant",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Tenant Id",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/components/schemas/id"
+                  }
+                },
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/tenants/{id}/users-limit": {
+            "get": {
+              "summary": "Get user limit settings for a tenant",
+              "description": "Gets user limit settings for a tenant",
+              "operationId": "getTenantsUsersLimit",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Tenant Id",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/components/schemas/id"
+                  }
+                },
+                {
+                  "name": "token",
+                  "in": "header",
+                  "description": "OAuth Token",
+                  "required": false,
+                  "schema": {
+                    "$ref": "#/components/schemas/token"
+                  }
+                }
+              ],
+              "tags": [
+                "Tenants"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Success",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/SuccessResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Bad Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/BadRequestResponse"
+                      }
+                    }
+                  },
+                  "headers": {
+                    "Access-Control-Allow-Origin": {
+                      "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                      "schema": {
+                        "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://api.spc.genesys.com",
+            "description": "SPC API"
+          }
+        ],
+        "tags": [
+          {
+            "name": "Tenants",
+            "description": "All APIs related to tenants"
+          }
+        ]
+      }
+    }
+  ],
+  "output": "combined.json",
+  "merge": {
+    "conflictResolution": "lastWins"
+  }
+}

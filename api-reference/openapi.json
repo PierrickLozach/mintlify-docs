@@ -1,217 +1,893 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "Security, Privacy & Compliance Platform API",
+    "description": "API documentation for SPC microservices",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.spc.genesys.com"
     }
   ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+  "components": {
+    "securitySchemes": {
+      "ApiGatewayAuthorizer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "x-amazon-apigateway-authtype": "custom",
+        "x-amazon-apigateway-authorizer": {
+          "type": "request",
+          "identitySource": "method.request.header.Authorization",
+          "authorizerResultTtlInSeconds": 0
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
-  "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
           "message": {
             "type": "string"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      },
+      "Tenant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the tenant"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the tenant"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the tenant"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "inactive",
+              "suspended"
+            ],
+            "description": "Current status of the tenant"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the tenant was created"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the tenant was last updated"
+          },
+          "settings": {
+            "type": "object",
+            "description": "Tenant-specific configuration settings",
+            "properties": {
+              "timezone": {
+                "type": "string",
+                "description": "Tenant's preferred timezone"
+              },
+              "features": {
+                "type": "object",
+                "description": "Enabled/disabled feature flags"
+              }
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "createdAt"
+        ]
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 200
+          }
+        }
+      },
+      "BadRequestResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "number",
+            "example": 400
+          }
+        }
+      },
+      "token": {
+        "type": "string"
+      },
+      "Access-Control-Allow-Origin": {
+        "type": "string",
+        "default": "*",
+        "example": "*"
+      },
+      "id": {
+        "type": "string"
       }
     }
-  }
+  },
+  "paths": {
+    "/auth/oauth2/token": {
+      "post": {
+        "summary": "Get auth token",
+        "operationId": "postAuthToken",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string"
+                  },
+                  "client_id": {
+                    "type": "string"
+                  },
+                  "client_secret": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "grant_type",
+                  "client_id",
+                  "client_secret"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authentication token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string"
+                    },
+                    "token_type": {
+                      "type": "string"
+                    },
+                    "expires_in": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/userinfo": {
+      "get": {
+        "summary": "Get user info",
+        "operationId": "getUserInfo",
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "User information"
+          }
+        }
+      }
+    },
+    "/auth/clientcredentials/{appId}/config": {
+      "get": {
+        "summary": "Get OAuth configuration",
+        "operationId": "getOAuthConfig",
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OAuth configuration"
+          }
+        }
+      }
+    },
+    "/auth/gc/permissions": {
+      "get": {
+        "summary": "Get GC permissions",
+        "operationId": "getGcPermissions",
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "GC permissions"
+          }
+        }
+      },
+      "post": {
+        "summary": "Update GC permissions",
+        "operationId": "postGcPermissions",
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated GC permissions"
+          }
+        }
+      }
+    },
+    "/media/videos": {
+      "get": {
+        "summary": "Get video list",
+        "operationId": "getVideoList",
+        "tags": [
+          "Media"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of videos"
+          }
+        }
+      }
+    },
+    "/media/videos/{videoId}": {
+      "get": {
+        "summary": "Get video URL (authenticated)",
+        "operationId": "getVideoUrl",
+        "tags": [
+          "Media"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Video URL"
+          }
+        }
+      }
+    },
+    "/media/videos/public/{videoId}": {
+      "get": {
+        "summary": "Get public video URL",
+        "operationId": "getPublicVideoUrl",
+        "tags": [
+          "Media"
+        ],
+        "parameters": [
+          {
+            "name": "videoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Public video URL"
+          }
+        }
+      }
+    },
+    "/dictionaries/groups": {
+      "get": {
+        "summary": "Get dictionary groups",
+        "operationId": "getDictionaryGroups",
+        "tags": [
+          "Dictionaries"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dictionary groups"
+          }
+        }
+      }
+    },
+    "/dictionaries/groups/{group}/keys": {
+      "get": {
+        "summary": "Get dictionary keys by group",
+        "operationId": "getDictionaryKeys",
+        "tags": [
+          "Dictionaries"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dictionary keys"
+          }
+        }
+      }
+    },
+    "/dictionaries/groups/{group}/keys/{key}": {
+      "get": {
+        "summary": "Get dictionary by key",
+        "operationId": "getDictionary",
+        "tags": [
+          "Dictionaries"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dictionary value"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update dictionary",
+        "operationId": "putDictionary",
+        "tags": [
+          "Dictionaries"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dictionary updated"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete dictionary",
+        "operationId": "deleteDictionary",
+        "tags": [
+          "Dictionaries"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dictionary deleted"
+          }
+        }
+      }
+    },
+    "/notifications/center/my": {
+      "get": {
+        "summary": "Get my notification center",
+        "operationId": "getNotificationCenterMy",
+        "tags": [
+          "Notifications"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User notifications"
+          }
+        }
+      }
+    },
+    "/stats/pagevisits": {
+      "get": {
+        "summary": "Get page visits",
+        "operationId": "getPageVisits",
+        "tags": [
+          "Stats"
+        ],
+        "security": [
+          {
+            "ApiGatewayAuthorizer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page visit data"
+          }
+        }
+      }
+    },
+    "/tenants/search": {
+      "get": {
+        "summary": "Search tenants",
+        "description": "Gets all tenants",
+        "operationId": "getSearchTenants",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "OAuth Token",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants": {
+      "post": {
+        "summary": "Create a tenant",
+        "description": "Creates a tenant",
+        "operationId": "createTenant",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "OAuth Token",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "All tenants",
+        "description": "Gets all tenants",
+        "operationId": "getTenants",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "OAuth Token",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{id}": {
+      "get": {
+        "summary": "A tenant",
+        "description": "Gets a tenant",
+        "operationId": "getTenant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Tenant Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "header",
+            "description": "Provider (gc, cognito)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "gc",
+              "enum": [
+                "gc",
+                "cognito"
+              ]
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "OAuth Token",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
+          },
+          {
+            "name": "env",
+            "in": "header",
+            "description": "Genesys Cloud environment (only required for the 'gc' provider)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "mypurecloud.com",
+              "enum": [
+                "apne2.pure.cloud",
+                "apne3.pure.cloud",
+                "aps1.pure.cloud",
+                "cac1.pure.cloud",
+                "euc2.pure.cloud",
+                "euw2.pure.cloud",
+                "mec1.pure.cloud",
+                "mypurecloud.com",
+                "mypurecloud.com.au",
+                "mypurecloud.de",
+                "mypurecloud.ie",
+                "mypurecloud.jp",
+                "sae1.pure.cloud",
+                "use2.us-gov-pure.cloud",
+                "usw2.pure.cloud"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tenant"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{id}/users-limit": {
+      "get": {
+        "summary": "Get user limit settings for a tenant",
+        "description": "Gets user limit settings for a tenant",
+        "operationId": "getTenantsUsersLimit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Tenant Id",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "description": "OAuth Token",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
+          }
+        ],
+        "tags": [
+          "Tenants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            },
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "description": "The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)",
+                "schema": {
+                  "$ref": "#/components/schemas/Access-Control-Allow-Origin"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tenants",
+      "description": "All APIs related to tenants"
+    }
+  ]
 }
