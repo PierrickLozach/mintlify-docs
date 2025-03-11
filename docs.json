@@ -23,12 +23,12 @@
           {
             "group": "Features",
             "pages": [
-              "Audit Viewer",
-              "COE AI Assistant",
-              "Data Subject Requests",
-              "FSI Report",
-              "Green Teacket",
-              "Security Advisor"
+              "audit-viewer",
+              "coe-ai-assistant",
+              "data-subject-requests",
+              "fsi-report",
+              "green-teacket",
+              "security-advisor"
             ]
           }
         ]
@@ -68,8 +68,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/SPC Portal Logo (light).png",
-    "dark": "/logo/SPC Portal Logo (dark).png"
+    "light": "/logo/spc-portal-logo-light.png",
+    "dark": "/logo/spc-portal-logo-dark.png"
   },
   "navbar": {
     "links": [
